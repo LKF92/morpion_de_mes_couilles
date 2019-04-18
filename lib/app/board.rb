@@ -19,12 +19,17 @@ class Board
   def play_turn(player)
     puts "Au tour de #{player.name},quelle case choisis-tu ?"
     case_choice = @boardcase_array[gets.chomp.to_i]
+    ### on redemande le choix du joueur tant qu'il choisit une case déjà prise
+    while case_choice.symbol == "X".light_red || case_choice.symbol == "O".blue
+      puts "Cette case est déjà prise ! Choisissez une des cases libres (en blanc!)"
+      case_choice = @boardcase_array[gets.chomp.to_i]
+    end
     case_choice.symbol = player.symbol
   end
 
   def victory?
-    player1_victory = ["X", "X", "X"]
-    player2_victory = ["O", "O", "O"]
+    player1_victory = ["X".light_red, "X".light_red, "X".light_red]
+    player2_victory = ["O".blue, "O".blue, "O".blue]
     ## on compare les cas de victoire (horizontale + diagonale)
     ## en créant un array (avec .map),
     ## que l'on compare aux symboles de notre Board

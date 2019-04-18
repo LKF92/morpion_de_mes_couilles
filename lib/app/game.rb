@@ -12,9 +12,9 @@ class Game
   ### CREATION DES PLAYERS
   def initialize
     puts "Hello joueur 1 ! Quel est ton nom ? "
-    @player1 = Player.new(gets.chomp, "X")
+    @player1 = Player.new(gets.chomp, "X".light_red)
     puts "Hello joueur 2 ! Quel est ton nom ? "
-    @player2 = Player.new(gets.chomp, "O")
+    @player2 = Player.new(gets.chomp, "O".blue)
     @game_status = "on going"
     @current_player = player1
     ### on instancie les deux players.
@@ -53,11 +53,20 @@ class Game
       current_game.play_turn(current_player)
       current_player == player1 ? (@current_player = player2) : (@current_player = player1)
     end
+    end_game
   end
+
+  def end_game
+    if current_game.victory? == nil
+      puts "Match nul ! On se fait une autre partie ? Y/N"
+    else
+      current_game.victory?
+    end
+  end
+
 
 end #end de Class
 
 
-
-test = Game.new.turn
-binding.pry
+#
+# test = Game.new.turn
