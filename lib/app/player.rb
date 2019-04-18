@@ -11,5 +11,5 @@ class Player
     @symbol= symbol
   end
 
-  
+
 end
