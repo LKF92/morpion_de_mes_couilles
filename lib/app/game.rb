@@ -19,10 +19,11 @@ class Game
     @current_player = player1
     ### on instancie les deux players.
     @current_game = Board.new(player1, player2)
-    binding.pry
   end
 
   def display_board
+    #Affiche dynamiquement le tableau en fonction des valeurs des BoardCases
+    # valeur = " " => on affiche l'index dans l'array; sinon on affiche le symbole.
     ### Première ligne du tableau
     current_game.boardcase_array[0].symbol == " " ? (print current_game.boardcase_array[0].case) : (print current_game.boardcase_array[0].symbol)
     print " | "
@@ -46,11 +47,17 @@ class Game
   end
 
   def turn
-    display_board
-
+    while current_game.victory? == nil
+      display_board
+      puts ""
+      current_game.play_turn(current_player)
+      current_player == player1 ? (@current_player = player2) : (@current_player = player1)
+    end
   end
-end
+
+end #end de Class
 
 
 
-Game.new
+test = Game.new.turn
+binding.pry
